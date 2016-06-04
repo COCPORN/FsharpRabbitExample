@@ -44,7 +44,7 @@ module Queue
     let private password = ""
     let private exchange = ""
 
-    let private factory = ConnectionFactory(HostName = host, Port = port, UserName = userName, Password = password)    
+    let private factory = ConnectionFactory(HostName = host) //, Port = port, UserName = userName, Password = password)    
 
     // Add a message to queue
     let enqueue queue message = 
