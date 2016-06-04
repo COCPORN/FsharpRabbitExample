@@ -19,6 +19,12 @@ module Queue
         | OrderPaid -> "payments"
         | OrderFulfilled -> "fulfillments"
 
+    let private toJson (message : FSharp.Data.Runtime.BaseTypes.IJsonDocument) = 
+        message.JsonValue.ToString()
+
+    let private fromJson (message : string) = 
+        Messages.merchantCreateV1.Parse(message)
+
     // Serialization
     let private toBytes message = 
         let formatter = BinaryFormatter()
@@ -58,7 +64,8 @@ module Queue
 
         let serializedMessage = 
             message 
-            |> toBytes
+            |> toJson
+            |> System.Text.Encoding.UTF8.GetBytes
 
         model.BasicPublish(exchange, queueName, null, serializedMessage)
 
@@ -75,7 +82,8 @@ module Queue
         let consumer = EventingBasicConsumer(model)
         consumer.Received.Add((fun message -> 
             message.Body
-            |> fromBytes<'T>
+            |> System.Text.Encoding.UTF8.GetString
+            |> fromJson
             |> callback
         ))
 

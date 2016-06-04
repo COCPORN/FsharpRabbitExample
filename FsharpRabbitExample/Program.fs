@@ -1,4 +1,5 @@
 ﻿open System
+open Messages
 
 // Object used as queue message
 type Order = { OrderId : int }
@@ -7,8 +8,8 @@ type Order = { OrderId : int }
 let main argv = 
 
     // Set up subscription
-    let cancelOrderReceivedQueue = subscribe<Order> OrderReceived (fun message -> 
-        printfn "Order received! Id #%d" message.OrderId // Message is strongly typed
+    let cancelOrderReceivedQueue = subscribe<Messages.merchantCreateV1.MerchantCreate> OrderReceived (fun message -> 
+        printfn "Order received! Id #%d" message.Id // Message is strongly typed
     )
 
     // Create function for adding message to specific queue using partial application
@@ -20,7 +21,7 @@ let main argv =
         match char.Key with
         | ConsoleKey.Escape -> cancelOrderReceivedQueue()
         | _ ->
-            enqueueOrder { OrderId = id }
+            enqueueOrder (merchantCreateV1.MerchantCreate(id, 123456))
             loop (id + 1)
     
     printfn "Press a key to order, [ESC] to exit"

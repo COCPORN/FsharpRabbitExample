@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FsharpRabbitExample", "FsharpRabbitExample\FsharpRabbitExample.fsproj", "{C312A5F6-5F62-470D-A0B7-695EAF470BCE}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "RabbitMQMockServer", "FsharpRabbitExample\RabbitMQMockServer.fsproj", "{C312A5F6-5F62-470D-A0B7-695EAF470BCE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
