@@ -23,7 +23,7 @@ module Queue
         message.JsonValue.ToString()
 
     let private fromJson (message : string) = 
-        Messages.merchantCreateV1.Parse(message)
+        Messages.``merchant create v1``.Parse(message)
 
     // Serialization
     let private toBytes message = 

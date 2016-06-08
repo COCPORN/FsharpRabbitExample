@@ -8,7 +8,7 @@ type Order = { OrderId : int }
 let main argv = 
 
     // Set up subscription
-    let cancelOrderReceivedQueue = subscribe<Messages.merchantCreateV1.MerchantCreate> OrderReceived (fun message -> 
+    let cancelOrderReceivedQueue = subscribe<Messages.``merchant create v1``.MerchantCreate> OrderReceived (fun message -> 
         printfn "Order received! Id #%d" message.Id // Message is strongly typed
     )
 
@@ -21,7 +21,7 @@ let main argv =
         match char.Key with
         | ConsoleKey.Escape -> cancelOrderReceivedQueue()
         | _ ->
-            enqueueOrder (merchantCreateV1.MerchantCreate(id, 123456))
+            enqueueOrder (``merchant create v1``.MerchantCreate(id, 123456))
             loop (id + 1)
     
     printfn "Press a key to order, [ESC] to exit"

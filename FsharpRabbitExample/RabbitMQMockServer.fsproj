@@ -56,6 +56,9 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Messages.fs" />
+    <Compile Include="Serialization.fs" />
+    <Compile Include="Subscriptions.fs" />
+    <Compile Include="Bus.fs" />
     <Compile Include="Queue.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
@@ -77,6 +80,8 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
