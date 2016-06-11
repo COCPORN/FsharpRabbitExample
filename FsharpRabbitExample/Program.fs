@@ -8,12 +8,13 @@ type Order = { OrderId : int }
 let main argv = 
 
     // Set up subscription
-    let cancelOrderReceivedQueue = subscribe<Messages.``merchant create v1``.MerchantCreate> OrderReceived (fun message -> 
-        printfn "Order received! Id #%d" message.Id // Message is strongly typed
+    let cancelOrderReceivedQueue = Bus.subscribe<Messages.Message> (fun message -> 
+        printfn "First listener: Id #%s" message.Id 
     )
 
-    // Create function for adding message to specific queue using partial application
-    let enqueueOrder = (enqueue OrderReceived)
+    let cancelOrderReceivedQueue = Bus.subscribe<Messages.Message> (fun message -> 
+        printfn "Second listener: Id #%s" message.Id 
+    )
 
     // Keep looping until user quits
     let rec loop id =
@@ -21,7 +22,8 @@ let main argv =
         match char.Key with
         | ConsoleKey.Escape -> cancelOrderReceivedQueue()
         | _ ->
-            enqueueOrder (``merchant create v1``.MerchantCreate(id, 123456))
+            printfn "Publishing on bus"
+            Bus.publish (new Message(id.ToString(), "WAT"))
             loop (id + 1)
     
     printfn "Press a key to order, [ESC] to exit"
